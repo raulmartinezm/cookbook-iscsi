@@ -1,6 +1,6 @@
 # iscsi-cookbook
 
-Installs and configures Open-iSCSI for Debian/Ubuntu Linux based systems.
+Chef cookbook that installs and configures Open-iSCSI for Debian/Ubuntu Linux based systems.
 
 ## Tested Platforms
 
