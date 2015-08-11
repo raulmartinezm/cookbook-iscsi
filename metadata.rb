@@ -5,3 +5,6 @@ license          'All rights reserved'
 description      'Installs/Configures iscsi'
 long_description 'Installs/Configures iscsi'
 version          '0.1.0'
+
+supports 'debian', '>= 7.8'
+supports 'ubuntu', '>= 12.04'

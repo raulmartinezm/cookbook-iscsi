@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.omnibus.chef_version = 'latest'
       end
 
-      node.vm.box = 'ubuntu/trusty64'
+      node.vm.box = 'wheezy64'
 
       node.vm.network :private_network, ip: "192.168.33.10#{node_number}"
 
@@ -34,9 +34,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           file_to_disk = './tmp/large_disk.vdi'
 
           node.vm.provider :virtualbox do |vb|
-            #vb.customize ["modifyvm", :id, "--memory", "2048"]
             vb.customize ['createhd', '--filename', file_to_disk, '--size', '100' ] unless File.exists?(file_to_disk)
-            vb.customize ['storageattach', :id,  '--storagectl', 'SATAController', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+            vb.customize ['storageattach', :id,  '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
           end
           # initialize and format
           node.vm.provision 'shell', inline: 'echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/sdb'

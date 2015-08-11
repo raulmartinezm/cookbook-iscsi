@@ -4,6 +4,8 @@ Installs and configures Open-iSCSI for Debian/Ubuntu Linux based systems.
 
 ## Tested Platforms
 
+- Debian 7.8 (Wheezy)
+- Ubuntu 12.04
 - Ubuntu 14.04
 
 ## Attributes
