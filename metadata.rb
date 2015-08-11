@@ -1,0 +1,7 @@
+name             'iscsi'
+maintainer       'Raul Martinez'
+maintainer_email 'raul.martinez07@alu.umh.es'
+license          'All rights reserved'
+description      'Installs/Configures iscsi'
+long_description 'Installs/Configures iscsi'
+version          '0.1.0'
