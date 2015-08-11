@@ -91,41 +91,41 @@ node.leading_login = <%= node['iscsi']['initiator']['leading_login'] %>
 # - If the value is 0, IO will be failed immediately.
 # - If the value is less than 0, IO will remain queued until the session
 # is logged back in, or until the user runs the logout command.
-node.session.timeo.replacement_timeout = 120
+node.session.timeo.replacement_timeout = <%= node['iscsi']['initiator']['replacement_timeout'] %>
 
 # To specify the time to wait for login to complete, edit the line.
 # The value is in seconds and the default is 15 seconds.
-node.conn[0].timeo.login_timeout = 15
+node.conn[0].timeo.login_timeout = <%= node['iscsi']['initiator']['login_timeout'] %>
 
 # To specify the time to wait for logout to complete, edit the line.
 # The value is in seconds and the default is 15 seconds.
-node.conn[0].timeo.logout_timeout = 15
+node.conn[0].timeo.logout_timeout = <%= node['iscsi']['initiator']['logout_timeout'] %>
 
 # Time interval to wait for on connection before sending a ping.
-node.conn[0].timeo.noop_out_interval = 5
+node.conn[0].timeo.noop_out_interval = <%= node['iscsi']['initiator']['noop_out_interval'] %>
 
 # To specify the time to wait for a Nop-out response before failing
 # the connection, edit this line. Failing the connection will
 # cause IO to be failed back to the SCSI layer. If using dm-multipath
 # this will cause the IO to be failed to the multipath layer.
-node.conn[0].timeo.noop_out_timeout = 5
+node.conn[0].timeo.noop_out_timeout = <%= node['iscsi']['initiator']['noop_out_timeout'] %>
 
 # To specify the time to wait for abort response before
 # failing the operation and trying a logical unit reset edit the line.
 # The value is in seconds and the default is 15 seconds.
-node.session.err_timeo.abort_timeout = 15
+node.session.err_timeo.abort_timeout = <%= node['iscsi']['initiator']['abort_timeout'] %>
 
 # To specify the time to wait for a logical unit response
 # before failing the operation and trying session re-establishment
 # edit the line.
 # The value is in seconds and the default is 30 seconds.
-node.session.err_timeo.lu_reset_timeout = 30
+node.session.err_timeo.lu_reset_timeout = <%= node['iscsi']['initiator']['lu_reset_timeout'] %>
 
 # To specify the time to wait for a target response
 # before failing the operation and trying session re-establishment
 # edit the line.
 # The value is in seconds and the default is 30 seconds.
-node.session.err_timeo.tgt_reset_timeout = 30
+node.session.err_timeo.tgt_reset_timeout = <%= node['iscsi']['initiator']['tgt_reset_timeout'] %>
 
 
 #******
@@ -156,7 +156,7 @@ node.session.err_timeo.tgt_reset_timeout = 30
 # down the iscsi service startup. Setting it to a low value can
 # cause a session to not get logged into, if there are distuptions
 # during startup or if the network is not ready at that time.
-node.session.initial_login_retry_max = 8
+node.session.initial_login_retry_max = <%= node['iscsi']['initiator']['initial_login_retry_max'] %>
 
 ################################
 # session and device queue depth
@@ -165,11 +165,11 @@ node.session.initial_login_retry_max = 8
 # To control how many commands the session will queue set
 # node.session.cmds_max to an integer between 2 and 2048 that is also
 # a power of 2. The default is 128.
-node.session.cmds_max = 128
+node.session.cmds_max = <%= node['iscsi']['initiator']['cmds_max'] %>
 
 # To control the device's queue depth set node.session.queue_depth
 # to a value between 1 and 1024. The default is 32.
-node.session.queue_depth = 32
+node.session.queue_depth = <%= node['iscsi']['initiator']['queue_depth'] %>
 
 ##################################
 # MISC SYSTEM PERFORMANCE SETTINGS
@@ -189,7 +189,7 @@ node.session.queue_depth = 32
 # behavior is not defined.
 #
 # The default value is -20. The setting must be between -20 and 20.
-node.session.xmit_thread_priority = -20
+node.session.xmit_thread_priority = <%= node['iscsi']['initiator']['xmit_thread_priority'] %>
 
 
 #***************
@@ -205,7 +205,7 @@ node.session.xmit_thread_priority = -20
 # initial R2T of "FirstBurstLength" at offset 0), uncomment the following line:
 #
 # The defaults is No.
-node.session.iscsi.InitialR2T = No
+node.session.iscsi.InitialR2T = <%= node['iscsi']['initiator']['InitialR2T'] %>
 
 #
 # To disable immediate data (i.e., the initiator does not send
@@ -217,28 +217,28 @@ node.session.iscsi.InitialR2T = No
 # with the iSCSI command packet), uncomment the following line:
 #
 # The default is Yes
-node.session.iscsi.ImmediateData = Yes
+node.session.iscsi.ImmediateData = <%= node['iscsi']['initiator']['ImmediateData'] %>
 
 # To specify the maximum number of unsolicited data bytes the initiator
 # can send in an iSCSI PDU to a target, edit the following line.
 #
 # The value is the number of bytes in the range of 512 to (2^24-1) and
 # the default is 262144
-node.session.iscsi.FirstBurstLength = 262144
+node.session.iscsi.FirstBurstLength = <%= node['iscsi']['initiator']['FirstBurstLength'] %>
 
 # To specify the maximum SCSI payload that the initiator will negotiate
 # with the target for, edit the following line.
 #
 # The value is the number of bytes in the range of 512 to (2^24-1) and
 # the defauls it 16776192
-node.session.iscsi.MaxBurstLength = 16776192
+node.session.iscsi.MaxBurstLength = <%= node['iscsi']['initiator']['MaxBurstLength'] %>
 
 # To specify the maximum number of data bytes the initiator can receive
 # in an iSCSI PDU from a target, edit the following line.
 #
 # The value is the number of bytes in the range of 512 to (2^24-1) and
 # the default is 262144
-node.conn[0].iscsi.MaxRecvDataSegmentLength = 262144
+node.conn[0].iscsi.MaxRecvDataSegmentLength =  <%= node['iscsi']['initiator']['MaxRecvDataSegmentLength'] %>
 
 # To specify the maximum number of data bytes the initiator will send
 # in an iSCSI PDU to the target, edit the following line.
@@ -247,7 +247,7 @@ node.conn[0].iscsi.MaxRecvDataSegmentLength = 262144
 # Zero is a special case. If set to zero, the initiator will use
 # the target's MaxRecvDataSegmentLength for the MaxXmitDataSegmentLength.
 # The default is 0.
-node.conn[0].iscsi.MaxXmitDataSegmentLength = 0
+node.conn[0].iscsi.MaxXmitDataSegmentLength = <%= node['iscsi']['initiator']['MaxXmitDataSegmentLength'] %>
 
 # To specify the maximum number of data bytes the initiator can receive
 # in an iSCSI PDU from a target during a discovery session, edit the
@@ -256,7 +256,7 @@ node.conn[0].iscsi.MaxXmitDataSegmentLength = 0
 # The value is the number of bytes in the range of 512 to (2^24-1) and
 # the default is 32768
 # 
-discovery.sendtargets.iscsi.MaxRecvDataSegmentLength = 32768
+discovery.sendtargets.iscsi.MaxRecvDataSegmentLength = <%= node['iscsi']['initiator']['MaxRecvDataSegmentLength'] %>
 
 # To allow the targets to control the setting of the digest checking,
 # with the initiator requesting a preference of enabling the checking, uncomment# one or both of the following lines:
@@ -286,7 +286,7 @@ discovery.sendtargets.iscsi.MaxRecvDataSegmentLength = 32768
 # created on each iface record.  If node.session.nr_sessions is greater
 # than 1, performing a 'login' for that node will ensure that the
 # appropriate number of sessions is created.
-node.session.nr_sessions = 1
+node.session.nr_sessions = <%= node['iscsi']['initiator']['nr_sessions'] %>
 
 #************
 # Workarounds
@@ -296,7 +296,7 @@ node.session.nr_sessions = 1
 # management function like an ABORT TASK or LOGICAL UNIT RESET, that
 # it does not respond to PDUs like R2Ts. To enable this behavior uncomment
 # the following line (The default behavior is Yes):
-node.session.iscsi.FastAbort = Yes
+node.session.iscsi.FastAbort = <%= node['iscsi']['initiator']['FastAbort'] %>
 
 # Some targets like Equalogic prefer that after an initiator has sent
 # a task management function like an ABORT TASK or LOGICAL UNIT RESET, that
